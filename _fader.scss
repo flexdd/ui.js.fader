@@ -2,6 +2,29 @@ $base-spacing-unit: 24px !default;
 $half-spacing-unit: $base-spacing-unit / 2 !default;
 
 /*
+
+	<div class="fader">
+		<article class="fader__panel is-active">
+			<img src="#" alt="">
+		</article>
+		<article class="fader__panel">
+			<img src="#" alt="">
+		</article>
+		<div class="fader-controls">
+			<div class="wrap">
+				<a href="#" class="fader__arrows fader__arrows--left" data-dir="prev"><i class="i i-arrow-left"></i></a>
+				<div class="fader-bullets fader__pagination">
+          <a href="#" class="fader__pagination__btn is-active"></a>
+          <a href="#" class="fader__pagination__btn"></a>
+        </div>
+				<a href="#" class="fader__arrows fader__arrows--right" data-dir="next"><i class="i i-arrow-right"></i></a>
+			</div>
+		</div>
+	</div>
+
+ */
+
+/*
  *
  * Fader Core Setup
  * 

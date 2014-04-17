@@ -10,10 +10,10 @@ $.fn.DarthFader = function( opts ) {
     'auto' : true,
     'pause' : false,
     'pagination' : true,
-    'pagination_selector' : ".fader-pagination",
+    'pagination_selector' : ".fader__pagination",
     'nav' : false,
-    'navigation_btns' : '.fader-arrows',
-    'panels_selector' : '.panel',
+    'navigation_btns' : '.fader__arrows',
+    'panels_selector' : '.fader__panel',
     'timeout' : 13000,
     before: function() {},
     after: function() {}
@@ -56,10 +56,10 @@ $.fn.DarthFader = function( opts ) {
     setup_panels : function( fader ) {
 
       // Wrap up the panels into a container
-      fader.panels.wrapAll( '<div class="fader-container" />' );
+      fader.panels.wrapAll( '<div class="fader__container" />' );
 
       // Store the panels container
-      fader.panels_container = fader.find( '.fader-container' );
+      fader.panels_container = fader.find( '.fader__container' );
 
       // wrapper styles
       fader.panels_container.css( { 'position': 'relative','top': 0,'left': 0 } );
