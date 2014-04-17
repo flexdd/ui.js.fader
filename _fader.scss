@@ -1,0 +1,33 @@
+$base-spacing-unit: 24px !default;
+$half-spacing-unit: $base-spacing-unit / 2 !default;
+
+/*
+ *
+ * Fader Core Setup
+ * 
+ */
+.fader {
+	position: relative;
+	margin-bottom: $base-spacing-unit;
+}
+
+.fader__panel {
+	
+	display: block;
+	position: absolute;
+	top: 		0;
+	left: 	0;
+	right: 	0;
+	bottom: 0;
+	opacity: 0;
+	@include transition( opacity 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) );
+
+	&.is-active {
+		position: relative;
+		z-index: 10;
+		left: 0;
+		top: 0;
+		opacity: 1;
+	}
+
+}

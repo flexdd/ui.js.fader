@@ -1,0 +1,29 @@
+{
+  "name": "DarthFader",
+  "main": "DarthFader.js",
+  "version": "1.0",
+  "authors": [
+    "webteam@forepoint.co.uk"
+  ],
+  "description": "A simple responsive jQuery fader with support for pagination, navigation and auto cycle",
+  "keywords": [
+    "Fader",
+    "jQuery",
+    "Media",
+    "Frontend",
+    "Javascript"
+  ],
+  "license": "MIT",
+  "homepage": "http://forepoint.co.uk",
+  "dependencies": {
+    "jquery":         "~1.11.0",
+    "modernizr":      "~2.7.2"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
