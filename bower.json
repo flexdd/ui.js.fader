@@ -15,10 +15,6 @@
   ],
   "license": "MIT",
   "homepage": "http://forepoint.co.uk",
-  "dependencies": {
-    "jquery":         "~1.11.0",
-    "modernizr":      "~2.7.2"
-  },
   "ignore": [
     "**/.*",
     "node_modules",
