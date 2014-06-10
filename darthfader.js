@@ -250,25 +250,23 @@ $.fn.DarthFader = function( opts ) {
     supports_transitions : function() {
 
       if( 'Modernizr' in window ) {
-
-          return Modernizr.csstransitions;
-
+        return Modernizr.csstransitions;
       }
 
-      var b = document.body || document.documentElement;
-      var s = b.style;
-      var p = 'transition';
+      var body = document.body || document.documentElement;
+      var style = body.style;
+      var property = 'transition';
 
-      if (typeof s[p] == 'string') {
+      if ( typeof style[ property ] == 'string' ) {
           return true;
       }
 
       // Tests for vendor specific prop
-      v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'], p = p.charAt(0).toUpperCase() + p.substr(1);
+      version = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'], property = property.charAt( 0 ).toUpperCase() + property.substr( 1 );
 
-      for (var i = 0; i < v.length; i++) {
+      for ( var i = 0; i < version.length; i++ ) {
 
-          if (typeof s[v[i] + p] == 'string') {
+          if ( typeof style[ vesion[ i ] + property ] == 'string' ) {
               return true;
           }
 
