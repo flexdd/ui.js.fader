@@ -1,7 +1,7 @@
 /*
  * DarthFader
  * Author: Forepoint
- * Version: 1.0
+ * Version: 1.1.1
  */
 $.fn.DarthFader = function( opts ) {
 
@@ -14,9 +14,7 @@ $.fn.DarthFader = function( opts ) {
     'nav' : false,
     'navigation_btns' : '.fader__arrows',
     'panels_selector' : '.fader__panel',
-    'timeout' : 13000,
-    before: function() {},
-    after: function() {}
+    'timeout' : 13000
 
   }, opts );
 
@@ -30,6 +28,11 @@ $.fn.DarthFader = function( opts ) {
 
     init : function( fader ) {
 
+      $.event.trigger({
+        type: "DarthFader.before_init",
+        fader : fader
+      });
+
       // start position
       fader.current_index = 0;
 
@@ -41,6 +44,8 @@ $.fn.DarthFader = function( opts ) {
       // number of panels
       fader.panels.count = fader.panels.size();
 
+      if( fader.panels.count == 0 ) { throw "The fader seems to be empty, thats not a good situation, please do a conditional to check the panels exist, exiting!"; }
+
       // set default animating to false
       fader.animating = false;
 
@@ -50,6 +55,11 @@ $.fn.DarthFader = function( opts ) {
       methods.setup_navigation( fader );
       methods.auto_cycle( fader );
       methods.on_hover( fader );
+
+      $.event.trigger({
+        type: "DarthFader.after_init",
+        fader : fader
+      });
 
     },
     // Wrap the panels, set some styles on the wrap and activate the first panel
@@ -95,6 +105,14 @@ $.fn.DarthFader = function( opts ) {
             index = ( fader.current_index == ( fader.panels.count - 1 ) ) ? 0 : fader.current_index + 1;
 
         }
+
+        // Event called after the navigation btns have been clicked
+        $.event.trigger({
+          type: "DarthFader.navigation_clicked",
+          new_panel_index: index,
+          current_panel_index: fader.current_index,
+          fader : fader
+        });
 
         methods.fade_it( fader, index );
 
@@ -146,13 +164,23 @@ $.fn.DarthFader = function( opts ) {
       fader.on( {
                 
           mouseenter: function() {
-              
-              clearInterval( fader.cycle );
+
+            clearInterval( fader.cycle );
+            
+            $.event.trigger({
+              type: "DarthFader.cycle_paused",
+              fader : fader
+            });
 
           },
           mouseleave: function() {
               
-              methods.restart_cycle( fader );
+            methods.restart_cycle( fader );
+
+            $.event.trigger({
+              type: "DarthFader.cycle_restarted",
+              fader : fader
+            });
 
           }
 
@@ -168,6 +196,14 @@ $.fn.DarthFader = function( opts ) {
         fader.pagination_btns.click( function(){
 
           var current_tab = $( this );
+
+          // Event called after the pagination btns have been clicked
+          $.event.trigger({
+            type: "DarthFader.pagination_clicked",
+            new_panel_index: current_tab.index,
+            current_panel_index: fader.current_index,
+            fader : fader
+          });
 
           methods.restart_cycle( fader );
 
@@ -192,10 +228,22 @@ $.fn.DarthFader = function( opts ) {
     },
     fade_it : function( fader, index ) {
 
+      $.event.trigger({
+        type: "DarthFader.before_fade",
+        next_panel : index,
+        fader : fader
+      });
+
       fader.current_index = index;
 
       var current_panel = fader.panels.eq( index );
       current_panel.addClass( consts.PANEL_ACTIVE_CLASS ).siblings().removeClass( consts.PANEL_ACTIVE_CLASS );
+
+      $.event.trigger({
+        type: "DarthFader.after_fade",
+        current_panel : index,
+        fader : fader
+      });
 
     },
     //checks to see if we support css transitions.
