@@ -1,7 +1,7 @@
 /*
  * DarthFader
  * Author: Forepoint
- * Version: 1.1.1
+ * Version: 1.1.2
  */
 $.fn.DarthFader = function( opts ) {
 
@@ -28,7 +28,7 @@ $.fn.DarthFader = function( opts ) {
 
     init : function( fader ) {
 
-      $.event.trigger({
+      fader.trigger({
         type: "DarthFader.before_init",
         fader : fader
       });
@@ -56,7 +56,7 @@ $.fn.DarthFader = function( opts ) {
       methods.auto_cycle( fader );
       methods.on_hover( fader );
 
-      $.event.trigger({
+      fader.trigger({
         type: "DarthFader.after_init",
         fader : fader
       });
@@ -107,7 +107,7 @@ $.fn.DarthFader = function( opts ) {
         }
 
         // Event called after the navigation btns have been clicked
-        $.event.trigger({
+        fader.trigger({
           type: "DarthFader.navigation_clicked",
           new_panel_index: index,
           current_panel_index: fader.current_index,
@@ -167,7 +167,7 @@ $.fn.DarthFader = function( opts ) {
 
             clearInterval( fader.cycle );
             
-            $.event.trigger({
+            fader.trigger({
               type: "DarthFader.cycle_paused",
               fader : fader
             });
@@ -177,7 +177,7 @@ $.fn.DarthFader = function( opts ) {
               
             methods.restart_cycle( fader );
 
-            $.event.trigger({
+            fader.trigger({
               type: "DarthFader.cycle_restarted",
               fader : fader
             });
@@ -198,7 +198,7 @@ $.fn.DarthFader = function( opts ) {
           var current_tab = $( this );
 
           // Event called after the pagination btns have been clicked
-          $.event.trigger({
+          fader.trigger({
             type: "DarthFader.pagination_clicked",
             new_panel_index: current_tab.index,
             current_panel_index: fader.current_index,
@@ -228,7 +228,7 @@ $.fn.DarthFader = function( opts ) {
     },
     fade_it : function( fader, index ) {
 
-      $.event.trigger({
+      fader.trigger({
         type: "DarthFader.before_fade",
         next_panel : index,
         fader : fader
@@ -239,7 +239,7 @@ $.fn.DarthFader = function( opts ) {
       var current_panel = fader.panels.eq( index );
       current_panel.addClass( consts.PANEL_ACTIVE_CLASS ).siblings().removeClass( consts.PANEL_ACTIVE_CLASS );
 
-      $.event.trigger({
+      fader.trigger({
         type: "DarthFader.after_fade",
         current_panel : index,
         fader : fader
